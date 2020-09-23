@@ -1,11 +1,12 @@
 package com.pokedex.domain;
 
+import com.pokedex.dto.PokemonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PokemonService {
@@ -13,36 +14,39 @@ public class PokemonService {
     @Autowired
     private PokemonRepository repository;
 
-    public Iterable<Pokemon> getPokemons() {
-        return repository.findAll();
+    public List<PokemonDTO> getPokemons() {
+        return repository.findAll().stream().map(PokemonDTO::create).collect(Collectors.toList());
     }
 
-    public Optional<Pokemon> getPokemonById(Long id) {
+    public Optional<PokemonDTO> getPokemonById(Long id) {
+        return repository.findById(id).map(PokemonDTO::create);
+    }
+
+    public Optional<Pokemon> getPokemonByIdRaw(Long id) {
         return repository.findById(id);
     }
 
-    public List<Pokemon> getPokemonsByType1(String type) {
-        return repository.findByType1(type);
+    public List<PokemonDTO> getPokemonsByType1(String type) {
+        return repository.findByType1(type).stream().map(PokemonDTO::create).collect(Collectors.toList());
     }
 
-    public List<Pokemon> getPokemonsByType2(String type) {
-        return repository.findByType2(type);
+    public List<PokemonDTO> getPokemonsByType2(String type) {
+        return repository.findByType2(type).stream().map(PokemonDTO::create).collect(Collectors.toList());
     }
 
-    public List<Pokemon> getPokemonsByTypes(String type1, String type2){
-        return repository.findByType1AndType2(type1, type2);
+    public List<PokemonDTO> getPokemonsByTypes(String type1, String type2) {
+        return repository.findByType1AndType2(type1, type2).stream().map(PokemonDTO::create).collect(Collectors.toList());
     }
 
-    public Pokemon insert(Pokemon pokemon) {
-        return repository.save(pokemon);
+    public PokemonDTO insert(Pokemon pokemon) {
+        return PokemonDTO.create(repository.save(pokemon));
     }
 
     public Pokemon update(Pokemon p, Long id) {
-        Optional<Pokemon> optional = getPokemonById(id);
+        Optional<Pokemon> optional = getPokemonByIdRaw(id);
 
         if (optional.isPresent()) {
             Pokemon aux = optional.get();
-
             aux.setAttack(p.getAttack());
             aux.setDefense(p.getDefense());
             aux.setGeneration(p.getGeneration());
@@ -59,17 +63,18 @@ public class PokemonService {
             repository.save(aux);
             return aux;
         } else {
-            throw new RuntimeException("Não foi possivel atualizar o registro");
+            return null;
         }
     }
 
-    public void delete(Long id) {
-        Optional<Pokemon> p = getPokemonById(id);
+    public boolean delete(Long id) {
+        Optional<Pokemon> p = getPokemonByIdRaw(id);
 
         if (p.isPresent()) {
             repository.deleteById(id);
+            return true;
         } else {
-            throw new RuntimeException("Registro não encontrado");
+            return false;
         }
     }
 }
