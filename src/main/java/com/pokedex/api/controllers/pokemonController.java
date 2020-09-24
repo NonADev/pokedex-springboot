@@ -1,17 +1,15 @@
-package com.pokedex.api;
+package com.pokedex.api.controllers;
 
-import com.pokedex.domain.Pokemon;
-import com.pokedex.domain.PokemonService;
+import com.pokedex.domain.models.Pokemon;
+import com.pokedex.domain.services.PokemonService;
 import com.pokedex.dto.PokemonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/pokemons")
@@ -26,9 +24,7 @@ public class pokemonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PokemonDTO> getById(@PathVariable("id") Long id) {
-        return service.getPokemonById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(service.getPokemonById(id));
     }
 
     @GetMapping("/raw/{id}")
@@ -56,12 +52,9 @@ public class pokemonController {
 
     @PostMapping
     public ResponseEntity<Pokemon> post(@RequestBody Pokemon pokemon) {
-        try {
-            service.insert(pokemon);
-            return ResponseEntity.created(getUri(pokemon.getId())).build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        PokemonDTO p = service.insert(pokemon);
+        URI location = getUri(p.getId());
+        return ResponseEntity.created(location).build();
     }
 
     private URI getUri(Long id) {
@@ -77,7 +70,8 @@ public class pokemonController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id) {
-        return service.delete(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        service.delete(id) ;
+        return ResponseEntity.ok().build();
     }
 
 }

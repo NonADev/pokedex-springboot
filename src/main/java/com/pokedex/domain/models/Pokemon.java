@@ -1,4 +1,4 @@
-package com.pokedex.domain;
+package com.pokedex.domain.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

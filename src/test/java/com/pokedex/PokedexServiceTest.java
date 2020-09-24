@@ -1,7 +1,8 @@
 package com.pokedex;
 
-import com.pokedex.domain.Pokemon;
-import com.pokedex.domain.PokemonService;
+import com.pokedex.api.exception.ObjectNotFoundException;
+import com.pokedex.domain.models.Pokemon;
+import com.pokedex.domain.services.PokemonService;
 import com.pokedex.dto.PokemonDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class PokedexApplicationTests {
+class PokedexServiceTest {
     @Autowired
     private PokemonService service;
 
@@ -57,8 +58,12 @@ class PokedexApplicationTests {
         service.delete(id);
 
         // Garantir exclusão
-        pokemonRawOptional = service.getPokemonByIdRaw(id);
-        assertFalse(pokemonRawOptional.isPresent());
+        try{
+            PokemonDTO pokemonDTO = service.getPokemonById(id);
+            fail("O Pokemon não foi excluido");
+        } catch (ObjectNotFoundException e) {
+            // ok
+        }
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.pokedex.api;
+package com.pokedex.api.controllers;
 
 import org.springframework.web.bind.annotation.*;
 

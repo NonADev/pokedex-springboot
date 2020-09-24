@@ -1,7 +1,12 @@
-package com.pokedex.domain;
+package com.pokedex.domain.services;
 
+import com.pokedex.api.exception.ObjectNotFoundException;
+import com.pokedex.domain.models.Pokemon;
+import com.pokedex.domain.repositories.PokemonRepository;
 import com.pokedex.dto.PokemonDTO;
+import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +20,11 @@ public class PokemonService {
     private PokemonRepository repository;
 
     public List<PokemonDTO> getPokemons() {
-        return repository.findAll().stream().map(PokemonDTO::create).collect(Collectors.toList());
+        return repository.findAll().stream().map(PokemonDTO::create).collect(Collectors.toList()); // usar PageRequest.of(0,10) para paginação
     }
 
-    public Optional<PokemonDTO> getPokemonById(Long id) {
-        return repository.findById(id).map(PokemonDTO::create);
+    public PokemonDTO getPokemonById(Long id) {
+        return repository.findById(id).map(PokemonDTO::create).orElseThrow(()-> new ObjectNotFoundException("Pokemon not found"));
     }
 
     public Optional<Pokemon> getPokemonByIdRaw(Long id) {
@@ -39,6 +44,7 @@ public class PokemonService {
     }
 
     public PokemonDTO insert(Pokemon pokemon) {
+        Assert.isNull(pokemon.getId(), "Não foi possivel inserir registro");
         return PokemonDTO.create(repository.save(pokemon));
     }
 
@@ -67,14 +73,7 @@ public class PokemonService {
         }
     }
 
-    public boolean delete(Long id) {
-        Optional<Pokemon> p = getPokemonByIdRaw(id);
-
-        if (p.isPresent()) {
-            repository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

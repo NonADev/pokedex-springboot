@@ -1,9 +1,8 @@
 package com.pokedex.dto;
 
-import com.pokedex.domain.Pokemon;
+import com.pokedex.domain.models.Pokemon;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 
 @Data
 public class PokemonDTO {
