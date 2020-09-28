@@ -1,8 +1,8 @@
 package com.pokedex.api.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pokedex.domain.dto.UserDTO;
-import com.pokedex.domain.models.User;
+import com.pokedex.api.dto.UserDTO;
+import com.pokedex.api.models.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

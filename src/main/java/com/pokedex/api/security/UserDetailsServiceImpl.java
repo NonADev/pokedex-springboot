@@ -1,7 +1,7 @@
 package com.pokedex.api.security;
 
-import com.pokedex.domain.models.User;
-import com.pokedex.domain.repositories.UserRepository;
+import com.pokedex.api.models.User;
+import com.pokedex.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

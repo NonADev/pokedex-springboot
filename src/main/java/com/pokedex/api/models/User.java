@@ -1,4 +1,4 @@
-package com.pokedex.domain.models;
+package com.pokedex.api.models;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH) //merge, ALL, DETACH, PERSIST
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))

@@ -1,9 +1,9 @@
 package com.pokedex;
 
 import com.pokedex.api.exception.ObjectNotFoundException;
-import com.pokedex.domain.models.Pokemon;
-import com.pokedex.domain.services.PokemonService;
-import com.pokedex.domain.dto.PokemonDTO;
+import com.pokedex.api.models.Pokemon;
+import com.pokedex.api.services.PokemonService;
+import com.pokedex.api.dto.PokemonDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

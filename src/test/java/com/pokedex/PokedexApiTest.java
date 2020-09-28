@@ -1,7 +1,8 @@
 package com.pokedex;
 
-import com.pokedex.domain.models.Pokemon;
-import com.pokedex.domain.dto.PokemonDTO;
+import com.pokedex.api.PokedexApplication;
+import com.pokedex.api.models.Pokemon;
+import com.pokedex.api.dto.PokemonDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

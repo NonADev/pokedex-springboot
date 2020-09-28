@@ -1,9 +1,9 @@
-package com.pokedex.domain.services;
+package com.pokedex.api.services;
 
 import com.pokedex.api.exception.ObjectNotFoundException;
-import com.pokedex.domain.models.Pokemon;
-import com.pokedex.domain.repositories.PokemonRepository;
-import com.pokedex.domain.dto.PokemonDTO;
+import com.pokedex.api.models.Pokemon;
+import com.pokedex.api.repositories.PokemonRepository;
+import com.pokedex.api.dto.PokemonDTO;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

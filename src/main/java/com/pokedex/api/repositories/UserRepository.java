@@ -1,6 +1,6 @@
-package com.pokedex.domain.repositories;
+package com.pokedex.api.repositories;
 
-import com.pokedex.domain.models.User;
+import com.pokedex.api.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

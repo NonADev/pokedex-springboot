@@ -1,4 +1,4 @@
-package com.pokedex.domain.models;
+package com.pokedex.api.models;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +17,19 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     private String nome;
+
+    public Role(){
+
+    }
+
+    public Role(String nome){
+        this.nome = nome;
+    }
+
+    public Role(Long id, String nome){
+        this.id =  id;
+        this.nome = nome;
+    }
 
     @Override
     public String getAuthority() {

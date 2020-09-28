@@ -1,6 +1,6 @@
-package com.pokedex.domain.repositories;
+package com.pokedex.api.repositories;
 
-import com.pokedex.domain.models.Pokemon;
+import com.pokedex.api.models.Pokemon;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

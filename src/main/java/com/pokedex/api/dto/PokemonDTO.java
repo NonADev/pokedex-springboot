@@ -1,6 +1,6 @@
-package com.pokedex.domain.dto;
+package com.pokedex.api.dto;
 
-import com.pokedex.domain.models.Pokemon;
+import com.pokedex.api.models.Pokemon;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 

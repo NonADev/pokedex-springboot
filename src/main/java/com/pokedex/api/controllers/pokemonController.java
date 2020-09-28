@@ -1,8 +1,8 @@
 package com.pokedex.api.controllers;
 
-import com.pokedex.domain.models.Pokemon;
-import com.pokedex.domain.services.PokemonService;
-import com.pokedex.domain.dto.PokemonDTO;
+import com.pokedex.api.models.Pokemon;
+import com.pokedex.api.services.PokemonService;
+import com.pokedex.api.dto.PokemonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -73,7 +73,7 @@ public class pokemonController {
 
     @DeleteMapping("/{id}")
     @Secured({"ROLE_ADMIN"})
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         service.delete(id) ;
         return ResponseEntity.ok().build();
     }
