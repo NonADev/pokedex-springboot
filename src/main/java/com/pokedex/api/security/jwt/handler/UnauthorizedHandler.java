@@ -1,6 +1,6 @@
-package com.carros.api.security.jwt.handler;
+package com.pokedex.api.security.jwt.handler;
 
-import com.carros.api.security.jwt.ServletUtil;
+import com.pokedex.api.security.jwt.ServletUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

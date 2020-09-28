@@ -70,7 +70,7 @@ public class JwtUtil {
 
         byte[] signingKey = JwtUtil.JWT_SECRET.getBytes();
 
-        int days = 10;
+        int days = 1;
         long time = days * 24 /*horas*/ * 60 /*min*/ * 60 /*seg*/ * 1000  /*milis*/;
         Date expiration = new Date(System.currentTimeMillis() + time);
 //        System.out.println(expiration);

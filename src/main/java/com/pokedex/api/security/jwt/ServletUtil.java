@@ -1,6 +1,6 @@
 package com.pokedex.api.security.jwt;
 
-//import com.google.gson.JsonObject;
+import com.google.gson.JsonObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -18,9 +18,9 @@ public class ServletUtil {
         response.getWriter().write(json);
     }
 
-//    public static String getJson(String key, String value) {
-//        JsonObject json = new JsonObject();
-//        json.addProperty(key, value);
-//        return json.toString();
-//    }
+    public static String getJson(String key, String value) {
+        JsonObject json = new JsonObject();
+        json.addProperty(key, value);
+        return json.toString();
+    }
 }

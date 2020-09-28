@@ -61,14 +61,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 //        String json = ServletUtil.getJson("token", jwtToken);
         String json = UserDTO.create(user, jwtToken).toJson();
-        com.pokedex.api.security.jwt.ServletUtil.write(response, HttpStatus.OK, json);
+        ServletUtil.write(response, HttpStatus.OK, json);
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException error) throws IOException, ServletException {
 
-        String json = com.pokedex.api.security.jwt.ServletUtil.getJson("error", "Login incorreto");
-        com.pokedex.api.security.jwt.ServletUtil.write(response, HttpStatus.UNAUTHORIZED, json);
+        String json = ServletUtil.getJson("error", "Login incorreto");
+        ServletUtil.write(response, HttpStatus.UNAUTHORIZED, json);
     }
 
 
