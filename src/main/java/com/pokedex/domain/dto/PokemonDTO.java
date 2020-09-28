@@ -1,4 +1,4 @@
-package com.pokedex.dto;
+package com.pokedex.domain.dto;
 
 import com.pokedex.domain.models.Pokemon;
 import lombok.Data;

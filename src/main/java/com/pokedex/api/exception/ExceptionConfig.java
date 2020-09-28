@@ -4,6 +4,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -25,6 +27,13 @@ public class ExceptionConfig extends ResponseEntityExceptionHandler {
     })
     public ResponseEntity errorIllegalArgument(Exception ex) {
         return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler({
+            AccessDeniedException.class
+    })
+    public ResponseEntity errorAcessDenied(Exception ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Error("Access Forbidden"));
     }
 
     @Override

@@ -2,9 +2,10 @@ package com.pokedex.api.controllers;
 
 import com.pokedex.domain.models.Pokemon;
 import com.pokedex.domain.services.PokemonService;
-import com.pokedex.dto.PokemonDTO;
+import com.pokedex.domain.dto.PokemonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -51,6 +52,7 @@ public class pokemonController {
     }
 
     @PostMapping
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Pokemon> post(@RequestBody Pokemon pokemon) {
         PokemonDTO p = service.insert(pokemon);
         URI location = getUri(p.getId());
@@ -63,12 +65,14 @@ public class pokemonController {
     }
 
     @PutMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Pokemon> put(@RequestBody Pokemon pokemon, @PathVariable("id") Long id) {
         Pokemon pokemonAux = service.update(pokemon, id);
         return pokemonAux != null ? ResponseEntity.ok(pokemonAux) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity delete(@PathVariable("id") Long id) {
         service.delete(id) ;
         return ResponseEntity.ok().build();

@@ -3,10 +3,9 @@ package com.pokedex.domain.services;
 import com.pokedex.api.exception.ObjectNotFoundException;
 import com.pokedex.domain.models.Pokemon;
 import com.pokedex.domain.repositories.PokemonRepository;
-import com.pokedex.dto.PokemonDTO;
+import com.pokedex.domain.dto.PokemonDTO;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
